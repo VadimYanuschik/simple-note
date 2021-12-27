@@ -1,0 +1,40 @@
+.form-container {
+  .auth-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #9c27b0;
+  }
+  .form-content {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    padding: 20px;
+    width: 100%;
+    max-width: 450px;
+
+    .vadim-image {
+      max-width: 450px;
+      width: 100%;
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .create-user-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .vadim-image {
+    display: block;
+    max-width: 450px;
+  }
+}

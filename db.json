@@ -1,0 +1,51 @@
+{
+  "lists": [
+    {
+      "id": 1,
+      "name": "фильмы",
+      "items": [
+        {
+          "id": 1,
+          "name": "гарри поттер",
+          "checked": false
+        },
+        {
+          "id": 2,
+          "name": "гарри поттер 2",
+          "checked": false
+        },
+        {
+          "id": 3,
+          "name": "кольца перца",
+          "checked": false
+        },
+        {
+          "id": 4,
+          "name": "asdfasdfsadfasdfasdf",
+          "checked": false
+        },
+        {
+          "id": 5,
+          "name": "кольца перца36",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "книги",
+      "items": [
+        {
+          "id": 1,
+          "name": "Марк Аврелий",
+          "checked": true
+        },
+        {
+          "id": 2,
+          "name": "Пушкин стихи",
+          "checked": false
+        }
+      ]
+    }
+  ]
+}
