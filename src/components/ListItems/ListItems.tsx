@@ -14,6 +14,7 @@ import {AddItem, CheckItem, DeleteItem} from "../../store/action-creators/item";
 import {ListItemProperties, ListItemsProperties} from "../../types/list";
 
 import {getAuth, signOut} from "firebase/auth";
+import {ItemState} from "../../types/item";
 
 const ListItems = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,8 @@ const ListItems = () => {
 
     const {id} = useParams<string>();
     const items : any[] | null | undefined = useTypedSelector(state => state.list.currentList)
+    const [currentItems, setCurrentItems] = React.useState<ListItemsProperties>([]);
+
     const [newItem, setNewItem] = React.useState<string>('');
     const [searchBarText, setSearchBarText] = React.useState<string>('');
     const [filteredItems, setFilteredItems] = React.useState<ListItemsProperties>([]);
@@ -29,20 +32,25 @@ const ListItems = () => {
         id && dispatch(fetchList(id))
     }, [id]);
 
+    useEffect(() => {
+        items && setCurrentItems(items)
+    }, [items]);
+
+
     const handleAddItem = (newItemName: string) => {
         id && dispatch(AddItem(id, newItemName))
         id && dispatch(fetchList(id))
         setNewItem('')
     }
 
-    const handleToggle = (id: string, status: boolean) => () => {
-        items?.map((list) => {
-            if(list.id === id) {
+    const handleToggle = (itemID: string, status: boolean) => () => {
+        setCurrentItems(currentItems.map((list) => {
+            if(list.id === itemID) {
                 list.checked = !list.checked
             }
             return list;
-        });
-        dispatch(CheckItem(id, status))
+        }));
+        dispatch(CheckItem(itemID, status));
     };
 
     const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -54,7 +62,7 @@ const ListItems = () => {
     const handleSearchBarChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if(searchBarText.length > 0) {
             let filteredItemsArray = items?.filter((list : ListItemProperties) => {
-                return list.name.toLowerCase().includes(searchBarText)
+                return list.name.toLowerCase().includes(searchBarText.toLowerCase())
             })
             filteredItemsArray && setFilteredItems(filteredItemsArray)
         }
@@ -82,7 +90,7 @@ const ListItems = () => {
             {id && items && (<div className="list-content">
                     <div className="inputs">
                         <div className="add-item">
-                            <TextField onKeyDown={handleEnterPress} value={newItem} onChange={(e) => setNewItem(e.target.value)} className="add-item-input" fullWidth margin="normal" color="secondary" id="standard-basic" label="Название" variant="standard" />
+                            <TextField onKeyDown={handleEnterPress} value={newItem} onChange={(e) => setNewItem(e.target.value)} className="add-item-input" fullWidth margin="normal" color="secondary" id="standard-basic" label="Название элемента" variant="standard" />
                             <Button onClick={() => handleAddItem(newItem)} className="add-item-button" color="secondary" variant="contained">Добавить</Button>
                         </div>
                         <TextField value={searchBarText} onChange={handleSearchBarChange}  className="search-bar" fullWidth color="secondary" id="standard-basic" label="Поиск" variant="standard" />

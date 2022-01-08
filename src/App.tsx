@@ -36,7 +36,5 @@ function App() {
         </div>
     );
 }
-// TODO: login/register nuances
-// TODO: deploy to heroku
 
 export default App;

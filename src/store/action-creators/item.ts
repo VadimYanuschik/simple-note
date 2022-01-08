@@ -7,6 +7,7 @@ export const CheckItem = (id: string, status: boolean) => {
     return async(dispatch: Dispatch<ItemAction>) => {
         try {
             dispatch({type: ItemActionTypes.CHECK_ITEM})
+
             const ItemRef = doc(db, "items", id);
             await updateDoc(ItemRef, {
                 checked: status

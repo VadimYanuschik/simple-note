@@ -13,9 +13,6 @@ export const fetchLists = (uid: string) => {
             const response = await getDocs(q);
             dispatch({type: ListActionTypes.FETCH_LISTS})
             let lists = response.docs.map((doc) => ({id: doc.id, ...doc.data()}))
-            console.log({
-                fetchLists: lists
-            })
             dispatch({type: ListActionTypes.FETCH_LISTS_SUCCESS, payload: lists})
         } catch (e) {
             console.log(e)
